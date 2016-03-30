@@ -1,0 +1,19 @@
+{
+  "name": "angulartest",
+  "version": "1.0.0",
+  "description": "Just a nice simple starting application that has Angular, Bootstrap, and jQuery readily available.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/trusignal/angulartest.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/trusignal/angulartest#readme",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
+}

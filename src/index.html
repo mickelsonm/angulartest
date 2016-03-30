@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en-us" ng-app="angulartest">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Angulartest Application</title>
+
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+</head>
+
+<body ng-controller="AppController">
+  <div class="container">
+    <h1>Angular Playground</h1>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">Programming Languages</div>
+      <div class="panel-body">
+        <ul class="list-group">
+          <li class="list-group-item" ng-repeat="l in languages | languageRatingFilter: 'none'">
+            <strong>{{l.name}}</strong>
+            <rating-display rating="l.rating"></rating-display>
+          </li>
+        </ul>
+        Sort by Rating:
+        <select class="form-control" ng-model="langsort" ng-change="langsortChanged()">
+          <option ng-repeat="so in sortRatingOptions" value="{{so}}">{{so | uppercase}}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <script src="bower_components/angular/angular.min.js"></script>
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+
+</html>
