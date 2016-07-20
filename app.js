@@ -1,7 +1,7 @@
 var express = require('express'),
     app = express();
 
-var listenPort = process.env.PORT = 3000;
+var listenPort = process.env.PORT || 3000;
 
 app.use(express.static(__dirname + '/src'));
 
