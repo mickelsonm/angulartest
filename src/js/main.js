@@ -36,9 +36,9 @@ angular.module('angulartest', [])
                 if (dir === 'low') {
                     return a.rating - b.rating;
                 } else if (dir === 'high') {
-                    return b.rating + b.rating;
+                    return b.rating - a.rating;
                 } else {
-                    return false;
+                    return 0;
                 }
             });
             return sorted;
@@ -54,16 +54,18 @@ angular.module('angulartest', [])
         };
     })
     .controller('AppController', ['$scope', '$filter', 'LanguageService', function($scope, $filter, LanguageService) {
-        $scope.languages = LanguageService.getLanguages();
+        // Cache the original language list to avoid repeated service calls
+        var originalLanguages = LanguageService.getLanguages();
+        $scope.languages = angular.copy(originalLanguages);
 
         $scope.sortRatingOptions = ['none', 'low', 'high'];
         $scope.langsort = $scope.sortRatingOptions[0];
         $scope.langsortChanged = function() {
             if ($scope.langsort === 'none') {
                 //resets our languages back to the original list
-                $scope.languages = LanguageService.getLanguages();
+                $scope.languages = angular.copy(originalLanguages);
             } else {
-                $scope.languages = $filter('languageRatingFilter')($scope.languages, $scope.langsort);
+                $scope.languages = $filter('languageRatingFilter')(originalLanguages, $scope.langsort);
             }
         };
     }]);
