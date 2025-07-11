@@ -1,4 +1,4 @@
-import Fastify, { FastifyInstance } from 'fastify';
+import Fastify from 'fastify';
 import cors from '@fastify/cors';
 import swagger from '@fastify/swagger';
 import swaggerUi from '@fastify/swagger-ui';
@@ -7,10 +7,12 @@ import swaggerUi from '@fastify/swagger-ui';
 import { userRoutes } from './routes/users';
 import { postRoutes } from './routes/posts';
 
-const server: FastifyInstance = Fastify({
+const server = Fastify({
   logger: {
     level: 'info',
-    prettyPrint: process.env.NODE_ENV === 'development'
+    transport: process.env.NODE_ENV === 'development' ? {
+      target: 'pino-pretty'
+    } : undefined
   }
 });
 
@@ -51,16 +53,16 @@ const start = async (): Promise<void> => {
         deepLinking: false
       },
       uiHooks: {
-        onRequest: function (request, reply, next) {
+        onRequest: function (request: any, reply: any, next: any) {
           next();
         },
-        preHandler: function (request, reply, next) {
+        preHandler: function (request: any, reply: any, next: any) {
           next();
         }
       },
       staticCSP: true,
-      transformStaticCSP: (header) => header,
-      transformSpecification: (swaggerObject, request, reply) => {
+      transformStaticCSP: (header: any) => header,
+      transformSpecification: (swaggerObject: any, request: any, reply: any) => {
         return swaggerObject;
       },
       transformSpecificationClone: true
